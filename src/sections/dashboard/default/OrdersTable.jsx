@@ -1,4 +1,6 @@
-import PropTypes from 'prop-types';
+import PropTypes, { func } from 'prop-types';
+import { useState, useEffect } from 'react'
+
 // material-ui
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -96,7 +98,7 @@ const headCells = [
 
 // ==============================|| ORDER TABLE - HEADER ||============================== //
 
-function OrderTableHead({ order, orderBy }) {
+function OrderTableHead({ order, orderBy, eventoOrden }) {
   return (
     <TableHead>
       <TableRow>
@@ -106,6 +108,7 @@ function OrderTableHead({ order, orderBy }) {
             align={headCell.align}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
+            onClick={()=>eventoOrden(headCell.id)}
           >
             {headCell.label}
           </TableCell>
@@ -148,8 +151,16 @@ function OrderStatus({ status }) {
 // ==============================|| ORDER TABLE ||============================== //
 
 export default function OrderTable() {
-  const order = 'asc';
-  const orderBy = 'tracking_no';
+  const order_ = 'asc';
+  const [order, setOrder] = useState('asc');
+  const orderBy_ = 'name';
+  const [orderBy, setOrderBy] = useState('tracking_no');
+
+
+  function orderHead(cabecera_id){
+    setOrder(order == 'asc' ? 'desc' : 'asc')
+    setOrderBy(cabecera_id)
+  }
 
   return (
     <Box>
@@ -164,7 +175,7 @@ export default function OrderTable() {
         }}
       >
         <Table aria-labelledby="tableTitle">
-          <OrderTableHead order={order} orderBy={orderBy} />
+          <OrderTableHead order={order} orderBy={orderBy} eventoOrden={orderHead} />
           <TableBody>
             {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
               const labelId = `enhanced-table-checkbox-${index}`;

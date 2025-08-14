@@ -16,9 +16,16 @@ const support = {
   children: [
     {
       id: 'sample-page',
-      title: 'Sample Page',
+      title: 'Sample PageX',
       type: 'item',
       url: '/sample-page',
+      icon: icons.ChromeOutlined
+    },
+    {
+      id: 'page1',
+      title: 'Page 2',
+      type: 'item',
+      url: '/page2',
       icon: icons.ChromeOutlined
     },
     {

@@ -16,7 +16,7 @@ const pages = {
   children: [
     {
       id: 'login1',
-      title: 'Login',
+      title: 'LoginX',
       type: 'item',
       url: '/login',
       icon: icons.LoginOutlined,

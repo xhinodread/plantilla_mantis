@@ -20,6 +20,14 @@ const dashboard = {
       url: '/dashboard/default',
       icon: icons.DashboardOutlined,
       breadcrumbs: false
+    },
+    {
+      id: 'Pagina1',
+      title: 'Pagina 1',
+      type: 'item',
+      url: '/dashboard/page1',
+      icon: icons.DashboardOutlined,
+      breadcrumbs: false
     }
   ]
 };
