@@ -1,0 +1,30 @@
+.popupContent {
+  /* font-size: 12px; */
+  margin: auto;
+  background: #a7bfeb;
+  /* width: 100%; */
+  /* width: 70cqi; */
+  width: auto;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9), 0 6px 20px 0 rgba(0, 0, 0, 0.9);
+}
+
+.containerButton{
+  padding: 10px;
+  text-align: end;
+}
+
+.textField{
+  text-align: end;
+}
+
+@media (max-width: 467px) {
+
+  .popupContent {
+    /* width: 100%; */
+    /* width: 25em; */
+  }
+
+
+}

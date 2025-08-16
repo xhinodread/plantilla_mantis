@@ -87,7 +87,7 @@ export default function Home1() {
         try {
             setDataIU(null);
             const var_periodo = periodo == null ? '' : '?periodo=' + periodo;
-            const apiUrl = import.meta.env.VITE_REMOTE_API1; // || 'https://localhost:7229' ;
+            const apiUrl = import.meta.env.VITE_REMOTE_API1; // || 'https://localhost:7229' o una direccion IP ;
 
             let response;
             if (apiUrl) {
@@ -101,16 +101,36 @@ export default function Home1() {
 
             const jsonData = await response.json();
 
-            //  console.log("json Data IU");
-            //  console.log(jsonData);
+             console.log("json Data IU");
+             console.log(jsonData);
 
-            setDataIU(jsonData);
+             if(jsonData.length > 0){
+
+               setDataIU(jsonData);
+             }
         } catch (error) {
-            console.error('Error obteniendo data desde el servidor remoto:', error);
+            // console.error('Error obteniendo data desde el servidor remoto:', error.message);
+            mostrarError(error);
             setDataIU([]);
         }
     };
 
+    const updateFetch = ()=>{
+      console.log("update fetch")
+      alert("********** UPDATE fetch ***********")
+      //console.log(crearDatePeriodo())
+      fetchDataIU(crearDatePeriodo());
+    }
+
+    function mostrarError(error){
+      const textoError = "Error obteniendo data desde el servidor remoto: ";
+      if (error instanceof TypeError) {
+        console.error(textoError, error.message);
+        // You can add specific handling for TypeError here
+      } else {
+        console.error(textoError, error);
+      }
+    }
 
 
     return(
@@ -135,7 +155,11 @@ export default function Home1() {
           {/* <ListaImpuestoUnico dataIU={dataIU} /> */}
         </div>
         <div>
-          <TablaDatos datosRender={dataIU} />
+          { dataIU != null?
+          
+          <TablaDatos datosRender={dataIU} clickUpdate={updateFetch} />
+          : <>...</>
+        }
         </div>
       </>
     )
