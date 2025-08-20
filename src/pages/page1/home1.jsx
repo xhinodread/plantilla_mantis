@@ -17,6 +17,9 @@ import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 
 // project imports
 import MainCard from 'components/MainCard';
@@ -61,6 +64,7 @@ export default function Home1() {
 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [dataIU, setDataIU] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         //console.log("llamada api " + crearDatePeriodo() )
@@ -85,16 +89,27 @@ export default function Home1() {
 
     const fetchDataIU = async (periodo = null) => {
         try {
+            setLoading(true);
             setDataIU(null);
             const var_periodo = periodo == null ? '' : '?periodo=' + periodo;
             const apiUrl = import.meta.env.VITE_REMOTE_API1; // || 'https://localhost:7229' o una direccion IP ;
+
+            const token = "....token....."
 
             let response;
             if (apiUrl) {
               const rutaApi = apiUrl + '/ParametrosRemu/GetByPeriodo' + var_periodo;
               console.log("rutaApi")
               // console.log(rutaApi)
-               response = await fetch(rutaApi); // Reemplazar con tu endpoint
+               response = await fetch(rutaApi, 
+                 {
+                   method: 'GET',
+                   headers: {
+                     'Authorization': `Bearer ${token}`,
+                     'Content-Type': 'application/json' // Example: set content type for JSON data
+                   }
+                 }
+              ); // Reemplazar con tu endpoint
             } else {
               //  response = await fetch('https://localhost:7229/ParametrosRemu/GetByPeriodo' + var_periodo); // Reemplazar con tu endpoint
             }
@@ -113,6 +128,11 @@ export default function Home1() {
             mostrarError(error);
             setDataIU([]);
         }
+
+        setTimeout(() => {
+          setLoading(false);
+        }, 0);
+
     };
 
     const updateFetch = ()=>{
@@ -155,11 +175,12 @@ export default function Home1() {
           {/* <ListaImpuestoUnico dataIU={dataIU} /> */}
         </div>
         <div>
-          { dataIU != null?
-          
-          <TablaDatos datosRender={dataIU} clickUpdate={updateFetch} />
-          : <>...</>
-        }
+          { loading ? <CircularProgress /> : <></>}
+          {
+          dataIU != null ?
+            <TablaDatos datosRender={dataIU} clickUpdate={updateFetch} />
+            :  loading ? <></> : <>...</>
+          }
         </div>
       </>
     )

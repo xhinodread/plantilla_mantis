@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
+import { useRef, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -30,6 +32,8 @@ import SettingOutlined from '@ant-design/icons/SettingOutlined';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import avatar1 from 'assets/images/users/avatar-1.png';
 
+import { logoutUser } from 'utils/utils.js'
+
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
   return (
@@ -53,6 +57,10 @@ export default function Profile() {
 
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(0);
+  
+  const navigate = useNavigate();
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -64,11 +72,18 @@ export default function Profile() {
     setOpen(false);
   };
 
-  const [value, setValue] = useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const cerrarSesion = async ()=>{
+    //alert("Logout");
+      // Llamamos a la función de logout que limpia el token del servidor y cliente
+      await logoutUser();
+      // Redirigimos al usuario a la página de login
+      navigate('/login', { replace: true });
+  }
+
 
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
@@ -132,7 +147,7 @@ export default function Profile() {
                       </Grid>
                       <Grid>
                         <Tooltip title="Logout">
-                          <IconButton size="large" sx={{ color: 'text.primary' }}>
+                          <IconButton size="large" sx={{ color: 'text.primary' }} onClick={cerrarSesion} >
                             <LogoutOutlined />
                           </IconButton>
                         </Tooltip>

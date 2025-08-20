@@ -86,48 +86,48 @@ function handleClick(valor){
         <Table aria-labelledby="tableTitle">
             <OrderTableHead order={order} orderBy={orderBy} />
             <TableBody>
-                {
-                    datosRender != null ? datosRender.map((row, index)=>{
-                        // const labelId = `enhanced-table-checkbox-${index}`;
-                        const labelId = `enhanced-table-checkbox-${row.id}`;
-                        return (
-                        <TableRow
-                            hover
-                            role="checkbox"
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            tabIndex={-1}
-                            key={index}
-                            onClick={() => handleClick(row)}
-                        >
-                            <TableCell component="th" id={labelId} scope="row">
-                                {/* {Number((row.desde).replace(",", ".") )}<br/>
+            {
+              datosRender != null ? datosRender.map((row, index) => {
+                // const labelId = `enhanced-table-checkbox-${index}`;
+                const labelId = `enhanced-table-checkbox-${row.id}`;
+                return (
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    tabIndex={-1}
+                    key={index}
+                    onClick={() => handleClick(row)}
+                  >
+                    <TableCell component="th" id={labelId} scope="row">
+                      {/* {Number((row.desde).replace(",", ".") )}<br/>
                                 <NumericFormat value={Number((row.desde).replace(",", ".") )} thousandSeparator allowedDecimalSeparators={[',']} displayType="text" prefix="$" /><br/> */}
-                                <NumberFormatBase value={Number((row.desde).replace(",", ".") )} displayType="text" prefix="$" format={format} />
-                            </TableCell>
-                            <TableCell>
-                                {/* <NumericFormat value={row.hasta} displayType="text" thousandSeparator prefix="$" /> */}
-                                <NumberFormatBase value={Number((row.hasta).replace(",", ".") )} displayType="text"  format={format} />
-                            </TableCell>
-                            <TableCell align="right">{row.factor}</TableCell>
-                            <TableCell>
-                                {/* {row.rebaja}<br/> */}
-                                <NumberFormatBase value={Number((row.rebaja).replace(",", ".") )} displayType="text"  format={format} />
-                            </TableCell>
-                            <TableCell align="right">
-                                {row.fechaVigencia}
-                            </TableCell>
-                        </TableRow>
-                    );
-                    })
-                    : <TableRow><TableCell align="right">...</TableCell></TableRow>
-                }
+                      <NumberFormatBase value={Number((row.desde).replace(",", "."))} displayType="text" prefix="$" format={format} />
+                    </TableCell>
+                    <TableCell>
+                      {/* <NumericFormat value={row.hasta} displayType="text" thousandSeparator prefix="$" /> */}
+                      <NumberFormatBase value={Number((row.hasta).replace(",", "."))} displayType="text" format={format} />
+                    </TableCell>
+                    <TableCell align="right">{row.factor}</TableCell>
+                    <TableCell>
+                      {/* {row.rebaja}<br/> */}
+                      <NumberFormatBase value={Number((row.rebaja).replace(",", "."))} displayType="text" format={format} />
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.fechaVigencia}
+                    </TableCell>
+                  </TableRow>
+                );
+              })
+                : <TableRow><TableCell align="right">...</TableCell></TableRow>
+            }
             </TableBody>
         </Table>
       </TableContainer>
       {
         Object.keys(datosRow).length > 0 ?
-        <PopUpImpuestoUnico openStatus={openStatus} datos={datosRow} clickUpdate={clickUpdate} clickCloseModal={closeModal} />
-        : <></>
+          <PopUpImpuestoUnico openStatus={openStatus} datos={datosRow} clickUpdate={clickUpdate} clickCloseModal={closeModal} />
+          : <></>
       }
     </Box>
   );

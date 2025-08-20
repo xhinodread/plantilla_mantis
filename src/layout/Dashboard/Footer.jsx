@@ -8,9 +8,9 @@ export default function Footer() {
     <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', p: '24px 16px 0px', mt: 'auto' }}>
       <Typography variant="caption">
         &copy; All rights reserved{' '}
-        <Link href="https://codedthemes.com/" target="_blank" underline="hover">
+        {/* <Link href="https://codedthemes.com/" target="_blank" underline="hover"> */}
           CodedThemes
-        </Link>
+        {/* </Link> */}
       </Typography>
       <Stack direction="row" sx={{ gap: 1.5, alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="https://codedthemes.com/about-us/" target="_blank" variant="caption" color="text.primary">

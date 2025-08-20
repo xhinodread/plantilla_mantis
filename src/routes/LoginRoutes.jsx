@@ -11,6 +11,7 @@ const RegisterPage = Loadable(lazy(() => import('pages/auth/Register')));
 
 const LoginRoutes = {
   path: '/',
+  element: <LoginPage />,  
   children: [
     {
       path: '/',
