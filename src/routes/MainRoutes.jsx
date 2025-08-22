@@ -1,7 +1,5 @@
 import { lazy } from 'react';
 
-
-
 // project imports
 import ProtectedRoute from 'components/ProtectedRoute';
 import Loadable from 'components/Loadable';
@@ -18,6 +16,8 @@ const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 
 // const Home1 = Loadable(lazy(() => import('pages/component-overview/color')));
 const Home1 = Loadable(lazy(() => import('pages/page1/home1')));
+const DocumentosEmitidos = Loadable(lazy(() => import('pages/page1/DocumentosEmitidos')));
+
 
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
@@ -27,12 +27,13 @@ const Page2 = Loadable(lazy(() => import('pages/extra-pages/page2')));
 
 const MainRoutes = {
   path: '/',
-   element: <ProtectedRoute><DashboardLayout /></ProtectedRoute>,
-  //element: <DashboardLayout />,
+  //  element: <ProtectedRoute><DashboardLayout /></ProtectedRoute>,
+  element: <DashboardLayout />,
   children: [
     {
       path: '/',
-      element: <ProtectedRoute><DashboardDefault /></ProtectedRoute>
+      // element: <ProtectedRoute><DashboardDefault /></ProtectedRoute>
+      element: <DashboardDefault />
     },
     {
       path: 'dashboard',
@@ -43,7 +44,12 @@ const MainRoutes = {
         },
         {
           path: 'page1',
-          element: <Home1 />
+          element: <ProtectedRoute> <Home1 /></ProtectedRoute>
+        },
+         {
+          path: 'docs_emitidos',
+          // element: <ProtectedRoute> <DocumentosEmitidos /></ProtectedRoute>
+          element:  <DocumentosEmitidos />
         }
       ]
     },

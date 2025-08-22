@@ -37,15 +37,14 @@ export default function AuthLogin({ isDemo = false }) {
 
   const [checked, setChecked] = React.useState(false);
   const [msgLogin, setMsgLogin] = React.useState(null);
-
   const [showPassword, setShowPassword] = React.useState(false);
+  
+  const userRef = React.useRef();
+  const passRef = React.useRef();
+  
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
-
-  const userRef = React.useRef();
-  const passRef = React.useRef();
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -55,7 +54,8 @@ export default function AuthLogin({ isDemo = false }) {
   const hacerLogin = async () => {
     console.log("hacerLogin Data IU");
 
-    const rutaApi = "http://localhost:5153/api/acceso/login"; // "http://localhost:5153/api/acceso/login"
+    const apiUrl = import.meta.env.VITE_REMOTE_API1; // || 'https://localhost:7229' o una direccion IP ;
+    const rutaApi = apiUrl+"/api/acceso/login"; // "http://localhost:5153/api/acceso/login"
 
     let usuario = {email: userRef.current.value, password: passRef.current.value};
 
@@ -67,7 +67,6 @@ export default function AuthLogin({ isDemo = false }) {
       },
       body: JSON.stringify(usuario)
     });
-
     
     console.log(response); 
 
@@ -277,7 +276,7 @@ export default function AuthLogin({ isDemo = false }) {
                   </Button>
                 </AnimateButton>
                   {msgLogin == null ? <div></div> :<div>{msgLogin}</div> }
-                  <Button variant="contained" color='secondary' onClick={verificarToken} >Check Token</Button>
+                  {/* <Button variant="contained" color='secondary' onClick={verificarToken} >Check Token</Button> */}
               </Grid>
             </Grid>
           </form>

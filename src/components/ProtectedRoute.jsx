@@ -8,7 +8,6 @@ const ProtectedRoute = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
 
-
     const checkAuth = async () => {
         const isTokenValid = await verificarTokenUser();
 
@@ -25,6 +24,7 @@ const ProtectedRoute = ({ children }) => {
 
         setLoading(false);
     };
+    
     useEffect(() => {
 
         checkAuth();
@@ -36,7 +36,7 @@ const ProtectedRoute = ({ children }) => {
     // console.log(isAuthenticated)
 
     if (loading) {
-        return <div>Cargando...</div>;
+        return <div>Validando sesion...</div>;
     }
 
     if (!isAuthenticated) {

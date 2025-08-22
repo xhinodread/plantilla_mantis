@@ -28,6 +28,14 @@ const dashboard = {
       url: '/dashboard/page1',
       icon: icons.DashboardOutlined,
       breadcrumbs: false
+    },
+    {
+      id: 'docs_emitidos',
+      title: 'Docs Emitidos',
+      type: 'item',
+      url: '/dashboard/docs_emitidos',
+      icon: icons.DashboardOutlined,
+      breadcrumbs: false
     }
   ]
 };
