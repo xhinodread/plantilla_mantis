@@ -3,6 +3,7 @@ import {hacerApiGet} from 'utils/utils.js'
 import TablaDatos from 'components/DocumentosEmitidos/TablaDatos';
 
 import {Box, TextField, Pagination, Button, ButtonGroup} from '@mui/material';
+import { textAlign } from '@mui/system';
 
 
 
@@ -160,7 +161,20 @@ const DocumentosEmitidos = ()=>{
                 < TablaDatos datosRender={listado} />
                 
                 <div>
-                    <Box sx={{ '& button': { m: 1 } }}>
+                    <Box 
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            mt: 2, // Optional: Add some top margin
+        mb: 2, // Optional: Add some bottom margin
+                            '& button': {
+                                m: 1
+                            }
+                        }} 
+                        // style={{ textAlign: "center" }}
+                    >
                         <ButtonGroup variant="contained" size="small" aria-label="Small button group" >
                             {/* {pagina > 1 ?
                             <Button size="small" onClick={() => {
