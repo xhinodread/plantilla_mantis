@@ -132,7 +132,7 @@ const DocumentosEmitidos = ()=>{
                 return _nroPaginas ;
             }
 
-            return value -0;
+            return value +1;
         })
     }
 
@@ -161,7 +161,6 @@ const DocumentosEmitidos = ()=>{
                 
                 <div>
                     <Box sx={{ '& button': { m: 1 } }}>
-                        {nroPaginas}
                         <ButtonGroup variant="contained" size="small" aria-label="Small button group" >
                             {/* {pagina > 1 ?
                             <Button size="small" onClick={() => {
